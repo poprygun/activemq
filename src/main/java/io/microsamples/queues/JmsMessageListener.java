@@ -11,7 +11,7 @@ import javax.jms.TextMessage;
 public class JmsMessageListener implements SessionAwareMessageListener<TextMessage> {
     @Override
     public void onMessage(TextMessage m, Session session) throws JMSException {
-        log.info(" [ \u2713 ] Received {} ", m);
+        log.info(" [ \u2713 ] Received {} ---> {} ", m, m.getText());
 
     }
 }

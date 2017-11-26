@@ -7,13 +7,10 @@
     <!-- =============================================== -->
     <!-- JMS Common, Define JMS connectionFactory       -->
     <!-- =============================================== -->
-    <!-- Activemq connection factory -->
     <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-        <!-- brokerURL, You may have different IP or port -->
-        <constructor-arg index="0" value="tcp://localhost:61616" />
+        <constructor-arg index="0" value="${mq.brokerUrl}" />
     </bean>
 
-    <!-- Pooled Spring connection factory -->
     <bean id="connectionFactory"
           class="org.springframework.jms.connection.CachingConnectionFactory">
         <constructor-arg ref="amqConnectionFactory" />
@@ -28,10 +25,10 @@
         <constructor-arg index="0" value="Send2Recv" />
     </bean>
 
-    <!-- JmsTemplate Definition -->
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory" />
         <property name="defaultDestination" ref="defaultDestination" />
+        <property name="deliveryPersistent" value="false" />
     </bean>
 
     <!-- ============================================================= -->
